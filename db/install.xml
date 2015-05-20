@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/herramientas/db" VERSION="20150520" COMMENT="Tools Table"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="local_herramientas" COMMENT="Default comment for local_herramientas, please edit me">
+      <FIELDS>
+        <FIELD NAME="idHerramientas" TYPE="int" LENGTH="255" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="Nombre" TYPE="char" LENGTH="30" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="Codigo" TYPE="number" LENGTH="30" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="Stock" TYPE="number" LENGTH="50" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="Disponible" TYPE="number" LENGTH="20" NOTNULL="false" SEQUENCE="false"/>
+        <FIELD NAME="Categoria" TYPE="char" LENGTH="20" NOTNULL="false" SEQUENCE="false" DECIMALS="2"/>
+   
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="idHerramientas"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>
