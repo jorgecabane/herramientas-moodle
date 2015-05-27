@@ -18,7 +18,7 @@
  *
  *
  * @package    local
- * @copyright  Jorge Cabané (jcabane@alumnos.uai.cl)
+ * @copyright  Jorge CabanÃ© (jcabane@alumnos.uai.cl)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once (dirname (__FILE__) . '/../../config.php');
@@ -52,9 +52,30 @@ $email = $USER ->email;
 
 //hasta aqui llega el header
 
-include "conexiondb.php";
-$resultado = mysql_query("SELECT * from Herramientas order by Nombre asc") or die(mysql_error());
 
+include "conexiondb.php";
+$id=$_POST['id'];
+?>
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css/style.css">
+        
+    </head>
+    <body>
+        <div align="center" >
+            <?php
+
+
+$resultado = mysql_query("SELECT * from Herramientas Where idHerramientas=$id") or die(mysql_error());
+$hola=  mysql_fetch_assoc($resultado);
+
+            $nombre=$hola['Nombre'];
+            $codigo=$hola['Codigo'];
+            $stock=$hola['Stock'];
+            $disponible=$hola['Disponible'];
+            $categoria=$hola['Categoria'];
+            $id=$hola['idHerramientas'];
+            
 if($resultado){
 
 echo "<table cellspacing='0'>"; 
@@ -64,36 +85,20 @@ echo "<tr class='even'>";
   echo  "<td>Stock</td>";
   echo  "<td>Disponible</td>" ;
   echo  "<td>Categoria</td>";
-  echo  "<td>Editar</td>";
-  echo  "<td>Eliminar</td>";
+
   echo  "</tr>" ;
-while ($row = mysql_fetch_array($resultado)) {
-    
 
     
-   
-  echo "<tr>";
-  echo  "<td>" . $row['Nombre'] . "</td>";
-  echo  "<td>" . $row['Codigo'] . "</td>" ;
-  echo  "<td>" . $row['Stock'] . "</td>";
-  echo  "<td>" . $row['Disponible'] . "</td>" ;
-  echo  "<td>" . $row['Categoria'] . "</td>";
-  ?>
-  
-<link rel="stylesheet" href="styles.css/style.css">
-            <td>
-     <form action="edit.php" method="post">
-        <input type="hidden" name="id" value="<?php echo $row['idHerramientas']; ?>" />
-        <input type="submit" value="Editar" />
-     </form>
- </td>
- <td>
-     <form action="delete.php" method="post">
-        <input type="hidden" name="id" value="<?php echo $row['idHerramientas']; ?>" />
-        <input type="submit" value="Eliminar" />
-     </form>
-     </td>
-     
+?>
+    
+   <form action="update.php" method="POST">
+
+  <tr>
+  <td><input type="text" name="nombre"  value="<?php echo $nombre; ?>" required></td>
+  <td><input type="number" name="codigo"  value="<?php echo $codigo; ?>" required></td>
+  <td><input type="number" name="stock"  value="<?php echo $stock; ?>" required></td>
+  <td><input type="number" name="disponible"  value="<?php echo $disponible; ?>" required></td>
+  <td><input type="text" name="categoria"  value="<?php echo $categoria; ?>" required></td>
 <?php     
      
   echo  "</tr>" ;
@@ -102,9 +107,13 @@ while ($row = mysql_fetch_array($resultado)) {
 
 };
 echo "</table>";
-};?>
-<form action="guardar.html">
-                <input type="submit" value="Agregar Inventario">
+;?>
+<input type="hidden" name="id" value="<?php echo $id; ?>" />
+                <input type="submit" value="Editar">
+</form>
+  <br><br>
+  <form action="index.php">
+                <input type="submit" value="Cancelar">
 </form>
 
 
