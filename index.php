@@ -103,7 +103,7 @@ while ($row = mysql_fetch_array($resultado)) {
 };
 echo "</table>";
 };?>
-<form action="guardar.html">
+<form action="guardar.php">
                 <input type="submit" value="Agregar Inventario">
 </form>
 
