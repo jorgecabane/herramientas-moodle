@@ -7,8 +7,8 @@ $categoria= $_POST['categoria'];
 if(isset($_POST['nombre']))
 {
 
-mysql_query("insert into Herramientas values (NULL,'$nombre',$codigo,$stock,$stock,'$categoria')");
-$fetch= mysql_query("SELECT Nombre,idHerramientas FROM Herramientas order by idHerramientas desc");
+mysql_query("insert into mdl_local_herramientas values (NULL,'$nombre',$codigo,$stock,$stock,'$categoria')");
+$fetch= mysql_query("SELECT nombre,idherramientas FROM mdl_local_herramientas order by idherramientas desc");
 $row=mysql_fetch_array($fetch);
 }
 ?>
@@ -16,4 +16,4 @@ $row=mysql_fetch_array($fetch);
 <div class="showbox"> <?php 
 echo"Agregaste:";
 
-echo $row['Nombre']; ?> </div>
+echo $row['nombre']; ?> </div>

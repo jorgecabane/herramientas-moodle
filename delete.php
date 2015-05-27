@@ -3,7 +3,7 @@ include "conexiondb.php";
 $id=$_POST['id'];
 
 
-$resultado = mysql_query("DELETE from Herramientas Where idHerramientas=$id") or die(mysql_error());
+$resultado = mysql_query("DELETE from mdl_local_herramientas Where idherramientas=$id") or die(mysql_error());
 
            
 if($resultado){

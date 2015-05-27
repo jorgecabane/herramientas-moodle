@@ -53,7 +53,7 @@ $email = $USER ->email;
 //hasta aqui llega el header
 
 include "conexiondb.php";
-$resultado = mysql_query("SELECT * from Herramientas order by Nombre asc") or die(mysql_error());
+$resultado = mysql_query("SELECT * from mdl_local_herramientas order by Nombre asc") or die(mysql_error());
 
 if($resultado){
 
@@ -73,23 +73,23 @@ while ($row = mysql_fetch_array($resultado)) {
     
    
   echo "<tr>";
-  echo  "<td>" . $row['Nombre'] . "</td>";
-  echo  "<td>" . $row['Codigo'] . "</td>" ;
-  echo  "<td>" . $row['Stock'] . "</td>";
-  echo  "<td>" . $row['Disponible'] . "</td>" ;
-  echo  "<td>" . $row['Categoria'] . "</td>";
+  echo  "<td>" . $row['nombre'] . "</td>";
+  echo  "<td>" . $row['codigo'] . "</td>" ;
+  echo  "<td>" . $row['stock'] . "</td>";
+  echo  "<td>" . $row['disponible'] . "</td>" ;
+  echo  "<td>" . $row['categoria'] . "</td>";
   ?>
   
 <link rel="stylesheet" href="styles.css/style.css">
             <td>
      <form action="edit.php" method="post">
-        <input type="hidden" name="id" value="<?php echo $row['idHerramientas']; ?>" />
+        <input type="hidden" name="id" value="<?php echo $row['idherramientas']; ?>" />
         <input type="submit" value="Editar" />
      </form>
  </td>
  <td>
      <form action="delete.php" method="post">
-        <input type="hidden" name="id" value="<?php echo $row['idHerramientas']; ?>" />
+        <input type="hidden" name="id" value="<?php echo $row['idherramientas']; ?>" />
         <input type="submit" value="Eliminar" />
      </form>
      </td>

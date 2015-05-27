@@ -8,7 +8,7 @@ $nombre=$_POST['nombre'];
         $categoria=$_POST['categoria'];
 
 
-$query="update Herramientas SET Nombre='$nombre', Codigo='$codigo', Stock='$stock', Disponible='$disponible', Categoria='$categoria' Where idHerramientas='$id'";
+$query="update mdl_local_herramientas SET nombre='$nombre', codigo='$codigo', stock='$stock', disponible='$disponible', categoria='$categoria' Where idherramientas='$id'";
 $resultado = mysql_query($query) or die(mysql_error());
 
 if($resultado){
