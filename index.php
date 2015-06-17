@@ -18,7 +18,7 @@
  *
  *
  * @package    local
- * @copyright  Jorge Cabané (jcabane@alumnos.uai.cl)
+ * @copyright  Jorge CabanÃ© (jcabane@alumnos.uai.cl)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once (dirname (__FILE__) . '/../../config.php');
@@ -52,8 +52,10 @@ $email = $USER ->email;
 
 //hasta aqui llega el header
 
-include "conexiondb.php";
-$resultado = mysql_query("SELECT * from mdl_local_herramientas order by Nombre asc") or die(mysql_error());
+//include "conexiondb.php";
+//$resultado = mysql_query("SELECT * from mdl_local_herramientas order by Nombre asc") or die(mysql_error());
+
+$resultado=$DB->get_records_sql("SELECT * from mdl_local_herramientas order by Nombre asc");
 
 if($resultado){
 
@@ -67,29 +69,29 @@ echo "<tr class='even'>";
   echo  "<td>Editar</td>";
   echo  "<td>Eliminar</td>";
   echo  "</tr>" ;
-while ($row = mysql_fetch_array($resultado)) {
-    
+//while ($row = mysql_fetch_array($resultado)) {
+    foreach($resultado as $row){
 
     
    
   echo "<tr>";
-  echo  "<td>" . $row['nombre'] . "</td>";
-  echo  "<td>" . $row['codigo'] . "</td>" ;
-  echo  "<td>" . $row['stock'] . "</td>";
-  echo  "<td>" . $row['disponible'] . "</td>" ;
-  echo  "<td>" . $row['categoria'] . "</td>";
+  echo  "<td>" . $row->nombre . "</td>";
+  echo  "<td>" . $row->codigo . "</td>" ;
+  echo  "<td>" . $row->stock . "</td>";
+  echo  "<td>" . $row->disponible . "</td>" ;
+  echo  "<td>" . $row->categoria . "</td>";
   ?>
   
 <link rel="stylesheet" href="styles.css/style.css">
             <td>
      <form action="edit.php" method="post">
-        <input type="hidden" name="id" value="<?php echo $row['idherramientas']; ?>" />
+        <input type="hidden" name="id" value="<?php echo $row->idherramientas; ?>" />
         <input type="submit" value="Editar" />
      </form>
  </td>
  <td>
      <form action="delete.php" method="post">
-        <input type="hidden" name="id" value="<?php echo $row['idherramientas']; ?>" />
+        <input type="hidden" name="id" value="<?php echo $row->idherramientas; ?>" />
         <input type="submit" value="Eliminar" />
      </form>
      </td>
