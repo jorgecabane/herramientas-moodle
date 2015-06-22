@@ -21,108 +21,99 @@
  * @copyright  Jorge Cabané (jcabane@alumnos.uai.cl)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once (dirname (__FILE__) . '/../../config.php');
+require_once (dirname(__FILE__) . '/../../config.php');
 global $DB, $USER, $CFG;
-require_login (); 
-$baseurl = new moodle_url ('/local/herramientas/index2.php'); //clase pagina
+require_login();
+$baseurl = new moodle_url('/local/herramientas/index2.php'); //clase pagina
 $context = context_system::instance();
-$PAGE->set_context( $context );
-$PAGE->set_url( $baseurl );
-$PAGE->set_pagelayout ( 'standard' );
-$PAGE->set_title ( get_string ('title', 'local_herramientas') );
-$PAGE->set_heading ( get_string ('title', 'local_herramientas') );
-$PAGE->navbar->add( get_string('herramientas', 'local_herramientas') );
+$PAGE->set_context($context);
+$PAGE->set_url($baseurl);
+$PAGE->set_pagelayout('standard');
+$PAGE->set_title(get_string('title', 'local_herramientas'));
+$PAGE->set_heading(get_string('title', 'local_herramientas'));
+$PAGE->navbar->add(get_string('herramientas', 'local_herramientas'));
 //$PAGE->navbar->add('index','reservar.php');
-echo $OUTPUT->header (); //shows header 
+echo $OUTPUT->header(); //shows header 
 //<link rel="stylesheet" href="css/style.css">
 
-echo $OUTPUT->heading ( get_string ('title', 'local_herramientas'));
+echo $OUTPUT->heading(get_string('title', 'local_herramientas'));
 echo $USER->firstname . " " . $USER->lastname . "  -  " . $USER->email;
 echo "<br>";
 //test
 /*
-$user = $DB->get_record('user', array('id'=>'2'));
-foreach($user as $data){
-	echo $data . "<br>";
-}
-*/
+  $user = $DB->get_record('user', array('id'=>'2'));
+  foreach($user as $data){
+  echo $data . "<br>";
+  }
+ */
 //$table = 'local_fitness';
-$email = $USER ->email;
+$email = $USER->email;
 //$result = $DB->get_records_sql('SELECT * FROM {local_fitness} WHERE email = ?', array($email));
-
 //hasta aqui llega el header
-
-
-include "conexiondb.php";
-$id=$_POST['id'];
-?>
-<html>
-    <head>
-        <link rel="stylesheet" href="styles.css/style.css">
-        
-    </head>
-    <body>
-        <div align="center" >
-            <?php
-
-
-$resultado = mysql_query("SELECT * from mdl_local_herramientas Where idherramientas=$id") or die(mysql_error());
-$hola=  mysql_fetch_assoc($resultado);
-
-            $nombre=$hola['nombre'];
-            $codigo=$hola['codigo'];
-            $stock=$hola['stock'];
-            $disponible=$hola['disponible'];
-            $categoria=$hola['categoria'];
-            $id=$hola['idherramientas'];
-            
-if($resultado){
-
-echo "<table cellspacing='0'>"; 
-echo "<tr class='even'>";
-  echo  "<td>Nombre</td>";
-  echo  "<td>Codigo</td>" ;
-  echo  "<td>Stock</td>";
-  echo  "<td>Disponible</td>" ;
-  echo  "<td>Categoria</td>";
-
-  echo  "</tr>" ;
-
-    
-?>
-    
-   <form action="update.php" method="POST">
-
-  <tr>
-  <td><input type="text" name="nombre"  value="<?php echo $nombre; ?>" required></td>
-  <td><input type="number" name="codigo"  value="<?php echo $codigo; ?>" required></td>
-  <td><input type="number" name="stock"  value="<?php echo $stock; ?>" required></td>
-  <td><input type="number" name="disponible"  value="<?php echo $disponible; ?>" required></td>
-  <td><input type="text" name="categoria"  value="<?php echo $categoria; ?>" required></td>
-<?php     
-     
-  echo  "</tr>" ;
- 
-  
-
+$id = $_POST['id'];
+$sql = "SELECT * from {local_herramientas} order by Nombre asc";
+$busqueda = array(
+    'idherramientas' => $id
+);
+$resultado = $DB->get_records_sql($sql, $busqueda);
+$data = '';
+foreach ($resultado as $resultados) {
+    $data = array(
+        $resultados->nombre,
+        $resultados->codigo,
+        $resultados->stock,
+        $resultados->disponible,
+        $resultados->categoria,
+    );
 };
-echo "</table>";
-;?>
-<input type="hidden" name="id" value="<?php echo $id; ?>" />
+$data [] = $data;
+?>
+
+<link href="styles.css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+    <div class="container">
+        <div class="main">
+            <h1>Agregue sus Herramientas</h1>
+
+            <!-- empieza input -->
+
+            <form action="update.php" method="POST">
+                <table>
+                    <tr>
+                        <td><input type="text" name="nombre"  value="<?php echo $data[0]; ?>" style="height: 26px;" required></td>
+                        <td><input type="number" name="codigo"  value="<?php echo $data[1]; ?>" style="height: 26px;" required></td>
+                        <td><input type="number" name="stock"  value="<?php echo $data[2]; ?>" style="height: 26px;" required></td>
+                        <td><input type="number" name="disponible"  value="<?php echo $data[3]; ?>" style="height: 26px;" required></td>
+                        <td><input type="text" name="categoria"  value="<?php echo $data[4]; ?>" style="height: 26px;" required></td>
+                        <td><input type="hidden" name="id"  value="<?php echo $id; ?>" ></td>
+                    </tr>
+                </table>
+                <input type="hidden" name="id" value="<?php echo $id; ?>" />
                 <input type="submit" value="Editar">
-</form>
-  <br><br>
-  <form action="index.php">
-                <input type="submit" value="Cancelar">
-</form>
+            </form>
 
+            <!-- termino del input -->
 
+            <br>
+            <form action="index.php">
+                <button type="submit" id="boton" class="btn btn-default">Cancelar edicion</button>
+            </form>
 
-
-
-
-<?php
-
+        </div> <!-- container -->
+        <div class="space"></div>
+        <div id="flash"></div>
+        <div id="show"></div>
+    </div>
+    <?php
 //hasta aqui llega el body
-   
-echo $OUTPUT->footer (); //shows footer 
+
+    echo $OUTPUT->footer(); //shows footer 

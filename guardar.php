@@ -74,20 +74,20 @@ $email = $USER ->email;
 	<form>
   <div class="form-group">
     <label for="exampleInputEmail1">Nombre</label>
-    <input type="text" class="form-control" id="Nombre" placeholder="ej: Martillo" required>
+    <input type="text" class="form-control" id="Nombre" placeholder="ej: Martillo" style="height: 23px;" required>
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Codigo</label>
-    <input type="number" class="form-control" id="Codigo" placeholder="Ingrese codigo de barra" required>
+    <input type="number" class="form-control" id="Codigo" placeholder="Ingrese codigo de barra" style="height: 23px;" required>
   </div>
   <div class="form-group">
     <label for="exampleInputFile">Stock</label>
-    <input type="number" id="Stock" class="form-control"  placeholder="Ingrese cantidad de Stock" required>
+    <input type="number" id="Stock" class="form-control"  placeholder="Ingrese cantidad de Stock" style="height: 23px;" required>
  
   </div>
   <div class="form-group">
     <label for="exampleInputFile">Categoría</label>
-    <input type="text" id="Categoria" class="form-control"  placeholder="ej: Portatiles" required>
+    <input type="text" id="Categoria" class="form-control"  placeholder="ej: Portatiles" style="height: 23px;" required>
  
   </div>
   

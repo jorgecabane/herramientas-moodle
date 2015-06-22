@@ -1,19 +1,28 @@
 <?php
-include('conexiondb.php');
-$nombre=$_POST['nombre'];
-$codigo=$_POST['codigo'];
-$stock= $_POST['stock'];
-$categoria= $_POST['categoria'];
-if(isset($_POST['nombre']))
-{
+require_once ('../../config.php');
+global $CFG, $DB;
+$nombre = $_POST ['nombre'];
+$codigo = $_POST ['codigo'];
+$stock = $_POST ['stock'];
+$categoria = $_POST ['categoria'];
 
-mysql_query("insert into mdl_local_herramientas values (NULL,'$nombre',$codigo,$stock,$stock,'$categoria')");
-$fetch= mysql_query("SELECT nombre,idherramientas FROM mdl_local_herramientas order by idherramientas desc");
-$row=mysql_fetch_array($fetch);
+if (isset ( $nombre )) {
+	$insert = array (
+			'nombre' => $nombre,
+			'codigo' => $codigo,
+			'disponible' => $stock,
+			'stock' => $stock,
+			'categoria' => $categoria 
+	);
+	
+	$nuevoinventario = $DB->insert_record ( 'local_herramientas', $insert );
+	if (! $nuevoinventario) {
+		echo 'error';
+	} else {
+		echo "<div class='showbox'>";
+		echo "Agregaste: ";
+		echo $nombre;
+		echo " </div>";
+	}
 }
 ?>
-
-<div class="showbox"> <?php 
-echo"Agregaste:";
-
-echo $row['nombre']; ?> </div>
