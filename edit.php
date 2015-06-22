@@ -53,7 +53,7 @@ $email = $USER->email;
 $id = $_POST['id'];
 $sql = "SELECT * from {local_herramientas} order by Nombre asc";
 $busqueda = array(
-    'idherramientas' => $id
+    'id' => $id
 );
 $resultado = $DB->get_records_sql($sql, $busqueda);
 $data = '';

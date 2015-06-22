@@ -4,7 +4,7 @@ require_once ('../../config.php');
 global $CFG, $DB;
 $id=$_POST['id'];
 $delete = array (
-			'idherramientas' => $id
+			'id' => $id
         );
 
 //$resultado = mysql_query("DELETE from mdl_local_herramientas Where idherramientas=$id") or die(mysql_error());

@@ -58,10 +58,10 @@ $resultado = $DB->get_records_sql ( $sql );
 $data = '';
 foreach ( $resultado as $resultados ) {
 	$editurl = new moodle_url ( '/local/herramientas/edit.php', array (
-			'id' => $resultados->idherramientas 
+			'id' => $resultados->id 
 	) );
 	$deleteurl = new moodle_url ( '/local/herramientas/delete.php', array (
-			'id' => $resultados->idherramientas 
+			'id' => $resultados->id 
 	) );
 	$data [] = array (
 			$resultados->nombre,
