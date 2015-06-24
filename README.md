@@ -16,3 +16,4 @@ Keep records of things you own: raw materials for example.
 
 #Installation
 In order to install LabInventory, the Herramientas directory in which this README file is, should be copied to the /local/ directory in your own Moodle installation. Then visit your admin page to install the database of this local proyect.
+As this is a local project, You should access to it from URL. Example: localhost/moodle/local/herramientas
